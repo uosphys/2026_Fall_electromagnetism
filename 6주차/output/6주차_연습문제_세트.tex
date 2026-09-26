@@ -1,0 +1,152 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=17mm,top=15mm,bottom=18mm]{geometry}
+\usepackage{fontspec,unicode-math,amsmath,enumitem,array,xcolor,fancyhdr,lastpage,tcolorbox}
+\setmainfont{Arial Unicode MS}
+\setsansfont{Arial Unicode MS}
+\setmathfont[Path=/usr/local/texlive/2019/texmf-dist/fonts/opentype/public/tex-gyre-math/]{texgyretermes-math.otf}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{2em}
+\setlist[enumerate]{leftmargin=7mm,itemsep=2pt,topsep=2pt}
+\definecolor{navy}{HTML}{0B1F3A}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{light}{HTML}{E0F0FE}
+\definecolor{hair}{HTML}{D0D5DD}
+\definecolor{gray}{HTML}{667085}
+\pagestyle{fancy}
+\fancyhf{}
+\lfoot{전자기학 2026 · WEEK 06}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\vect}[1]{\symbf{#1}}
+\newcommand{\unit}[1]{\hat{\symbf{#1}}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\problem}[3]{%
+  \par\vspace{3.5mm}
+  {\large\bfseries\color{navy}#1\hfill{\normalsize\color{blue}#2점}}\par
+  \smallskip #3\par
+}
+\newcommand{\sectionbar}[1]{%
+  \par\vspace{3mm}
+  \colorbox{navy}{\parbox{0.965\linewidth}{\color{white}\bfseries\large #1}}
+  \par\vspace{1mm}
+}
+\newtcolorbox{infobox}{colback=light,colframe=blue,boxrule=0.5pt,arc=0pt,left=3mm,right=3mm,top=2mm,bottom=2mm}
+\newtcolorbox{checkbox}{colback=white,colframe=hair,boxrule=0.5pt,arc=0pt,left=3mm,right=3mm,top=2mm,bottom=2mm}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries\color{navy} 6주차 연습문제 세트}\\[2mm]
+  {\large 정전기적 일·에너지, 도체, 라플라스 방정식}\\[1mm]
+  {\small Griffiths 4판 §2.4, §2.5, §3.1 · 10월 12일 연습}
+\end{center}
+
+\begin{infobox}
+\textbf{풀이 원칙}\quad 모든 문제에서 사용한 법칙을 먼저 쓰고, 최종 답의 부호·차원·극한·경계조건 가운데 적용 가능한 항목을 검산하시오. 진공의 유전율은 $\epsilon_0$이며, 별도 언급이 없으면 기준 전위는 $V(\infty)=0$이다.
+\par\smallskip
+{\small\color{gray}Griffiths 4판 예제 2.9-2.11과 연습문제 2.31-2.44, 3.1-3.6의 개념 및 검산 구조를 참고하여 새롭게 재구성하였다.}
+\end{infobox}
+
+\sectionbar{A. 정전기적 일과 에너지 · 30점}
+
+\problem{P1. 정사각형 전하배치의 조립 에너지}{12}{%
+한 변의 길이가 $a$인 정사각형의 세 꼭짓점에 시계방향으로 $+q$, $-q$, $+2q$가 고정되어 있다. 비어 있는 네 번째 꼭짓점으로 $-2q$를 무한대에서 천천히 가져온다.
+\begin{enumerate}[label=(\alph*)]
+  \item 마지막 전하 $-2q$를 가져오는 데 외력이 한 일을 구하시오.
+  \item 네 전하 전체를 무한대에서 조립하는 데 필요한 총일을 전하쌍 합으로 구하시오.
+  \item 총에너지의 부호가 이 배치의 결합 여부에 대해 무엇을 뜻하는지 한 문장으로 설명하시오.
+\end{enumerate}
+}
+
+\problem{P2. 비균일 대전 구의 장 에너지}{18}{%
+반지름 $R$인 절연체 구에
+\[
+  \rho(r)=\rho_0\!\left(1-\frac{r^2}{R^2}\right) \quad (0\le r\le R),
+  \qquad \rho=0 \quad (r>R)
+\]
+의 전하가 분포한다.
+\begin{enumerate}[label=(\alph*)]
+  \item 총전하 $Q$를 $\rho_0$와 $R$로 나타내시오.
+  \item 가우스 법칙으로 구 안팎의 $\vect E(r)$를 구하고 $r=R$에서 연속성을 확인하시오.
+  \item $W=(\epsilon_0/2)\int_{\text{all space}}E^2\dd\tau$를 이용해 정전기에너지를 구하시오. 내부와 외부 적분을 분리해 표시하시오.
+\end{enumerate}
+}
+
+\sectionbar{B. 도체와 축전기 · 45점}
+
+\problem{P3. 대전 구와 중성 도체껍질}{13}{%
+반지름 $R$인 금속구가 총전하 $+Q$를 띠고 있다. 그 바깥에는 안쪽 반지름 $a$, 바깥쪽 반지름 $b$인 동심 금속껍질이 있으며 처음에는 중성이다. $R<a<b$이다.
+\begin{enumerate}[label=(\alph*)]
+  \item $r=R$, $r=a$, $r=b$에서의 표면전하밀도를 각각 구하시오.
+  \item 네 영역 $r<R$, $R<r<a$, $a<r<b$, $r>b$에서 전기장을 구하시오.
+  \item 중심의 전위 $V(0)$를 구하시오.
+  \item 바깥 도체껍질을 접지하면 각 표면의 총전하와 $V(0)$이 어떻게 바뀌는지 구하시오.
+\end{enumerate}
+}
+
+\problem{P4. 두 공동을 가진 중성 도체}{12}{%
+반지름 $R$인 중성 금속구 안에 서로 겹치지 않는 두 구형 공동을 만들었다. 각 공동의 반지름은 $a$, $b$이고, 중심에는 각각 $+q$와 $-2q$가 놓여 있다.
+\begin{enumerate}[label=(\alph*)]
+  \item 두 공동의 안쪽 표면에 유도되는 총전하를 각각 구하시오.
+  \item 점전하가 각 공동의 중심에 있다는 조건을 사용하여 안쪽 표면전하밀도를 구하시오.
+  \item 바깥 표면의 총전하를 구하시오.
+  \item 금속구 바깥의 전기장을 구하고, 공동의 위치가 이 결과에 영향을 주는지 유일성 정리를 이용해 설명하시오.
+\end{enumerate}
+}
+
+\problem{P5. 평행판 사이의 전기적 압력}{10}{%
+넓이 $A$인 두 금속판이 거리 $d$만큼 떨어져 있고, 각각 $+Q$, $-Q$를 띤다. 가장자리 효과는 무시한다.
+\begin{enumerate}[label=(\alph*)]
+  \item 판 사이의 전기장과 각 판에 작용하는 단위면적당 힘을 구하시오.
+  \item 총 인력을 구하시오.
+  \item 전하 $Q$가 일정한 상태에서 판 사이 거리가 $d$에서 $d-\delta d$로 줄어들 때 장 에너지의 감소량을 1차까지 구하시오.
+  \item (c)의 결과가 전기력이 한 일과 일치함을 보이시오.
+\end{enumerate}
+}
+
+\problem{P6. 동축 원통형 축전기}{10}{%
+반지름이 $a$, $b$인 두 동축 금속 원통 사이가 진공이며 $a<b$이다. 길이 $L$은 $a$, $b$보다 매우 크고 안쪽 원통에는 $+Q$, 바깥 원통에는 $-Q$가 있다.
+\begin{enumerate}[label=(\alph*)]
+  \item $a<s<b$에서 전기장을 구하시오.
+  \item 두 원통 사이의 전위차와 정전용량 $C$를 구하시오.
+  \item $W=Q^2/(2C)$와 장 에너지 적분으로 에너지를 각각 계산해 비교하시오.
+\end{enumerate}
+}
+
+\sectionbar{C. 라플라스 방정식과 유일성 · 25점}
+
+\problem{P7. 일차원 경계값 문제}{10}{%
+전하가 없는 영역 $0<x<d$에서 경계 전위가 $V(0)=V_0$, $V(d)=V_1$로 주어진다.
+\begin{enumerate}[label=(\alph*)]
+  \item 라플라스 방정식을 풀어 $V(x)$와 $\vect E(x)$를 구하시오.
+  \item 임의의 $0<a<\min(x,d-x)$에 대해
+  \[
+    V(x)=\frac{V(x-a)+V(x+a)}{2}
+  \]
+  임을 확인하시오.
+  \item $V_0\ne V_1$일 때 열린 구간 $0<x<d$ 안에 국소 최대값이나 최소값이 없는 이유를 설명하시오.
+\end{enumerate}
+}
+
+\problem{P8. 평균값 성질과 빈 도체 공동}{15}{%
+반지름 $R$인 구 $S_R$의 바깥쪽, 중심에서 거리 $D>R$인 곳에 점전하 $q$가 있다.
+\begin{enumerate}[label=(\alph*)]
+  \item 구 내부에는 전하가 없음을 확인하고, 구면 위 전위의 평균이 중심 전위와 같다는 평균값 성질을 쓰시오.
+  \item 중심 전위를 이용하여 $S_R$ 위 전위의 평균값을 구하시오. $R$에 의존하지 않는 이유를 설명하시오.
+  \item 이제 구면 $S_R$ 전체를 하나의 닫힌 도체 공동 벽으로 바꾸고 벽의 전위를 상수 $V_c$로 유지한다. 공동이 비어 있을 때 내부의 유일한 전위와 전기장을 제1 유일성 정리로 구하시오.
+  \item 경계값을 정확히 만족하는 영상전하 후보해가 실제 해가 되는 논리를 두 문장 이내로 설명하시오.
+\end{enumerate}
+}
+
+\begin{checkbox}
+\textbf{최종 검산 체크리스트}
+\begin{enumerate}[label={\color{blue}□},leftmargin=7mm,itemsep=1pt]
+  \item 에너지의 단위가 J인지 확인했다.
+  \item 도체 내부에서 $\vect E=\vect 0$이고 각 도체가 등전위인지 확인했다.
+  \item 표면 바로 밖의 장이 $\vect E=(\sigma/\epsilon_0)\unit n$을 만족하는지 확인했다.
+  \item 라플라스 해가 모든 경계값과 최대·최소 원리를 만족하는지 확인했다.
+\end{enumerate}
+\end{checkbox}
+
+\end{document}
