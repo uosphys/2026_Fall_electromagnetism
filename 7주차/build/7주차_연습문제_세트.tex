@@ -1,0 +1,137 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=17mm,top=15mm,bottom=18mm]{geometry}
+\usepackage{fontspec,unicode-math,amsmath,enumitem,xcolor,fancyhdr,lastpage,needspace,tcolorbox}
+\setmainfont{Arial Unicode MS}
+\setsansfont{Arial Unicode MS}
+\setmathfont[Path=/usr/local/texlive/2019/texmf-dist/fonts/opentype/public/tex-gyre-math/]{texgyretermes-math.otf}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\setlist[enumerate]{leftmargin=7mm,itemsep=1pt,topsep=2pt}
+\definecolor{navy}{HTML}{0B1F3A}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{light}{HTML}{E0F0FE}
+\definecolor{hair}{HTML}{D0D5DD}
+\definecolor{gray}{HTML}{667085}
+\pagestyle{fancy}
+\fancyhf{}
+\lfoot{전자기학 2026 · WEEK 07}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\vect}[1]{\symbf{#1}}
+\newcommand{\unit}[1]{\hat{\symbf{#1}}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\problem}[3]{%
+  \needspace{0.18\textheight}
+  \par\vspace{2.2mm}
+  {\large\bfseries\color{navy}#1\hfill{\normalsize\color{blue}#2점}}\par
+  \smallskip #3\par
+}
+\newcommand{\sectionbar}[1]{%
+  \par\vspace{2.5mm}
+  \colorbox{navy}{\parbox{0.965\linewidth}{\color{white}\bfseries\large #1}}
+  \par\vspace{0.5mm}
+}
+\newtcolorbox{infobox}{colback=light,colframe=blue,boxrule=0.5pt,arc=0pt,left=3mm,right=3mm,top=2mm,bottom=2mm}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries\color{navy}7주차 연습문제 세트}\\[1.5mm]
+  {\large 영상법과 변수 분리법}\\[1mm]
+  {\small Griffiths 4판 §3.1 복습, §3.2, §3.3 · 10월 19일 연습}
+\end{center}
+
+\begin{infobox}
+\textbf{풀이 원칙}\quad 실제 영역과 경계조건을 먼저 쓰고, 영상전하는 반드시 실제 영역 밖에 두시오. 변수 분리법에서는 각 항이 라플라스 방정식과 모든 경계조건을 만족하는지 확인하시오. 진공의 유전율은 $\epsilon_0$이다.
+\end{infobox}
+
+\sectionbar{A. 접지된 무한 평면의 영상법 · 34점}
+
+\problem{P1. 점전하와 접지된 평면의 전위}{12}{%
+접지된 무한 도체평면이 $z=0$에 있고, 점전하 $+q$가 $(0,0,a)$에 놓여 있다. 실제 영역은 $z>0$이다.
+\begin{enumerate}[label=(\alph*)]
+  \item 영상전하의 위치와 크기를 쓰고 그 선택 이유를 설명하시오.
+  \item 원통좌표계 $(\rho,\phi,z)$로 실제 영역의 전위 $V(\rho,z)$를 구하시오.
+  \item $V(\rho,0)=0$과 $V\to0$ $(r\to\infty)$를 확인하고 유일성 정리로 결과를 정당화하시오.
+\end{enumerate}
+}
+
+\problem{P2. 평면의 유도 면전하}{12}{%
+P1의 전위를 사용한다.
+\begin{enumerate}[label=(\alph*)]
+  \item $\sigma(\rho)=-\epsilon_0(\partial V/\partial z)_{z=0^+}$를 계산하시오.
+  \item $|\sigma|$가 가장 큰 위치와 $\rho\gg a$에서의 감소율을 구하시오.
+  \item $Q_{\mathrm{ind}}=\int_0^\infty\sigma(\rho)2\pi\rho\,\dd\rho$를 구하고 전하 보존의 관점에서 해석하시오.
+\end{enumerate}
+}
+
+\problem{P3. 실제 전하가 받는 힘과 일}{10}{%
+P1의 점전하에 대하여 다음을 구하시오.
+\begin{enumerate}[label=(\alph*)]
+  \item 실제 전하가 받는 힘을 영상전하가 만드는 장으로부터 구하시오.
+  \item 전하를 무한대에서 높이 $a$까지 천천히 가져올 때 외력이 한 일을 구하시오.
+  \item 두 점전하의 상호작용 에너지를 그대로 사용하면 에너지가 두 배가 되는 이유를 설명하시오.
+\end{enumerate}
+}
+
+\sectionbar{B. 구면 경계의 영상법 · 25점}
+
+\problem{P4. 점전하와 접지된 도체구}{15}{%
+반지름 $R$인 접지된 도체구의 중심을 원점에 두고, 점전하 $+q$를 $z$축 위 $z=a$에 놓는다. 단, $a>R$이다.
+\begin{enumerate}[label=(\alph*)]
+  \item 구 안에 놓을 영상전하의 위치 $b$와 크기 $q'$를 구하시오.
+  \item $r\ge R$에서의 전위를 쓰고 $r=R$에서 모든 $\theta$에 대해 $V=0$임을 보이시오.
+  \item 구에 유도된 총전하를 구하시오.
+  \item 실제 전하가 받는 힘의 크기와 방향을 구하시오.
+\end{enumerate}
+}
+
+\problem{P5. 중성인 고립 도체구}{10}{%
+P4의 접지선을 제거하고 도체구의 총전하를 0으로 유지한다.
+\begin{enumerate}[label=(\alph*)]
+  \item P4의 영상전하에 더하여 구 중심에 놓아야 할 영상전하 $q_0'$를 구하시오.
+  \item 구 바깥의 전위를 쓰고 구면이 등전위임을 확인하시오.
+  \item 접지된 경우와 비교하여 무한대에서 전위의 가장 낮은 차수 항이 어떻게 달라지는지 설명하시오.
+\end{enumerate}
+}
+
+\sectionbar{C. 직교좌표계의 변수 분리법 · 27점}
+
+\problem{P6. 하나의 사인 모드로 주어진 경계}{13}{%
+전하가 없는 직사각형 영역 $0<x<b$, $0<y<a$에서
+\[
+V(0,y)=V(x,0)=V(x,a)=0,
+\qquad V(b,y)=V_0\sin\!\left(\frac{\pi y}{a}\right)
+\]
+이다.
+\begin{enumerate}[label=(\alph*)]
+  \item $V=XY$를 대입하여 분리된 두 상미분방정식을 구하시오.
+  \item 네 경계조건을 만족하는 전위 $V(x,y)$를 구하시오.
+  \item $x=b/2$, $y=a/2$에서 전위와 전기장을 구하시오.
+\end{enumerate}
+}
+
+\problem{P7. 일정한 경계전위의 푸리에 전개}{14}{%
+P6과 같은 영역에서 세 경계는 0이고 $V(b,y)=V_0$ $(0<y<a)$이다.
+\begin{enumerate}[label=(\alph*)]
+  \item $V_0$를 사인 급수로 전개하여 짝수 모드가 사라짐을 보이시오.
+  \item 영역 안의 전위를 무한급수로 나타내시오.
+  \item 급수의 각 항이 라플라스 방정식과 세 영 경계를 만족함을 확인하시오.
+  \item 모서리에서 경계값이 불연속일 때 급수가 어떤 값으로 수렴하는지 설명하시오.
+\end{enumerate}
+}
+
+\sectionbar{D. 구 좌표계의 변수 분리법 · 14점}
+
+\problem{P8. $\cos\theta$ 경계가 고르는 모드}{14}{%
+반지름 $R$인 구면의 경계전위가 $V(R,\theta)=V_0\cos\theta$로 주어진다.
+\begin{enumerate}[label=(\alph*)]
+  \item 구 안쪽 $r<R$에서 원점에 유한한 전위를 구하고 전기장을 해석하시오.
+  \item 구 바깥 $r>R$에서 $V\to0$ $(r\to\infty)$인 전위를 구하시오.
+  \item 두 해에서 필요한 르장드르 다항식의 차수 $\ell$을 밝히시오.
+  \item 바깥 해의 먼 거리 거동으로부터 등가 쌍극자 모멘트를 구하시오.
+\end{enumerate}
+}
+
+\end{document}

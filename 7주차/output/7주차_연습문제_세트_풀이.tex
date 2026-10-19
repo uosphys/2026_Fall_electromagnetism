@@ -1,0 +1,193 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage{fontspec,amsmath,amssymb,bm,enumitem,xcolor,fancyhdr,lastpage}
+\setmainfont{Noto Sans CJK KR}
+\XeTeXlinebreaklocale "ko"
+\definecolor{deepblue}{RGB}{20,60,140}
+\pagestyle{fancy}\fancyhf{}
+\lhead{\small 전자기학 2026-2학기}\rhead{\small 7주차 연습문제 세트 풀이}
+\cfoot{\small \thepage\,/\,\pageref{LastPage}}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\newcommand{\prob}[2]{\vspace{8pt}{\large\bfseries\color{deepblue} #1\quad #2}\par\vspace{2pt}}
+\newcommand{\sect}[1]{\vspace{10pt}{\Large\bfseries #1}\par\vspace{2pt}\hrule\vspace{4pt}}
+\newcommand{\ans}[1]{\par\fcolorbox{deepblue}{blue!4}{\parbox{0.95\linewidth}{\textbf{답}\quad #1}}\par}
+\newcommand{\chk}[1]{\par{\small\color{deepblue}\textbf{검산}\ #1}\par}
+\newcommand{\rhat}{\hat{\mathbf r}}
+\newcommand{\shat}{\hat{\mathbf s}}
+\newcommand{\xhat}{\hat{\mathbf x}}
+\newcommand{\nhat}{\hat{\mathbf n}}
+\newcommand{\zhat}{\hat{\mathbf z}}
+\newcommand{\E}{\mathbf E}
+\begin{document}
+\newcommand{\yhat}{\hat{\mathbf y}}
+\newcommand{\that}{\hat{\boldsymbol\theta}}
+\begin{center}
+{\LARGE\bfseries 7주차 연습문제 세트 풀이}\\[3pt]
+{\large 영상법과 변수 분리법}\\[2pt]
+{\small Griffiths 4판 §3.1 복습, §3.2, §3.3}
+\end{center}
+\vspace{-4pt}
+표기: $k\equiv 1/(4\pi\epsilon_0)$. 문제의 표기를 따라 P1--P3의 원통좌표계 지름 방향 거리는 $\rho$로 쓴다(교재의 $s$에 해당).
+각 문제는 실제 영역·경계조건 → 풀이 → 답 → 검산 순으로 정리한다.
+
+%=====================================================
+\sect{A. 접지된 무한 평면의 영상법}
+\prob{P1.}{점전하와 접지된 평면의 전위}
+\textbf{실제 영역·경계조건}\quad $z>0$ (전하는 $+q$ 하나), $V(z=0)=0$, $r\to\infty$에서 $V\to0$.
+
+\textbf{(a)}\quad 영상전하 $q'=-q$를 $(0,0,-a)$에 둔다. 평면 위의 모든 점은 $+q$와 $-q$에서 같은 거리에 있어 두 전위가 상쇄되므로 $V(z=0)=0$이 자동으로 만족된다.
+영상전하는 실제 영역 밖($z<0$)에 있으므로 $z>0$에서의 푸아송 방정식(전하 분포)을 바꾸지 않는다.
+
+\textbf{(b)}\quad
+\[
+V(\rho,z)=\frac{q}{4\pi\epsilon_0}\left[\frac{1}{\sqrt{\rho^2+(z-a)^2}}-\frac{1}{\sqrt{\rho^2+(z+a)^2}}\right]\qquad(z\ge0),
+\]
+$z<0$(도체 쪽)에서는 $V=0$.
+
+\textbf{(c)}\quad $z=0$에서 두 제곱근이 모두 $\sqrt{\rho^2+a^2}$이므로 $V(\rho,0)=0$. $r\to\infty$에서 각 항이 $1/r$로 줄고 그 차는 $\sim 2a z/r^3$로 더 빨리 줄어 $V\to0$.
+$z>0$에서 이 함수는 $(0,0,a)$의 점전하 $q$에 대한 푸아송 방정식을 만족하고 모든 경계조건을 만족하므로, 제1 유일성 정리에 따라 실제 해이다.
+\ans{$q'=-q$, 위치 $(0,0,-a)$;\ $V(\rho,z)=\dfrac{q}{4\pi\epsilon_0}\Big[\dfrac{1}{\sqrt{\rho^2+(z-a)^2}}-\dfrac{1}{\sqrt{\rho^2+(z+a)^2}}\Big]$}
+
+\prob{P2.}{평면의 유도 면전하}
+\textbf{(a)}\quad
+\[
+\frac{\partial V}{\partial z}\Big|_{z=0^+}=\frac{q}{4\pi\epsilon_0}\left[\frac{a}{(\rho^2+a^2)^{3/2}}+\frac{a}{(\rho^2+a^2)^{3/2}}\right]
+\ \Rightarrow\
+\sigma(\rho)=-\frac{qa}{2\pi(\rho^2+a^2)^{3/2}}.
+\]
+\textbf{(b)}\quad $|\sigma|$는 $\rho$가 커질수록 단조 감소하므로 최대는 전하 바로 아래 $\rho=0$: $|\sigma|_{\max}=\dfrac{q}{2\pi a^2}$.
+$\rho\gg a$이면 $\sigma\approx-\dfrac{qa}{2\pi\rho^3}$, 즉 $\rho^{-3}$로 감소한다.
+
+\textbf{(c)}\quad $u=\rho^2+a^2$로 치환하면
+\[
+Q_{\rm ind}=-\frac{qa}{2\pi}\int_0^\infty\frac{2\pi\rho\,d\rho}{(\rho^2+a^2)^{3/2}}=-qa\left[-\frac{1}{\sqrt{\rho^2+a^2}}\right]_0^\infty=-q.
+\]
+도체평면은 접지되어 있으므로 $-q$는 땅에서 공급된다(땅으로 $+q$가 빠져나감). 전하 $+q$가 내보내는 선속이 $z<0$으로 새지 않고 모두 평면에서 끝나므로 유도전하가 정확히 $-q$이다.
+\ans{$\sigma=-\dfrac{qa}{2\pi(\rho^2+a^2)^{3/2}}$;\ $|\sigma|_{\max}=\dfrac{q}{2\pi a^2}$ ($\rho=0$), $\rho\gg a$에서 $\propto\rho^{-3}$;\ $Q_{\rm ind}=-q$}
+\chk{$\sigma=\epsilon_0E_z(0^+)$로 표면 바로 위 장 $\E=(\sigma/\epsilon_0)\zhat$와 부호 일치(장선이 평면을 향해 아래로).}
+
+\prob{P3.}{실제 전하가 받는 힘과 일}
+\textbf{(a)}\quad $z>0$에서 유도전하가 만드는 장은 영상전하 $-q$의 장과 같으므로
+\[
+\mathbf F=q\,\E_{\rm image}(0,0,a)=-\frac{1}{4\pi\epsilon_0}\frac{q^2}{(2a)^2}\zhat=-\frac{q^2}{16\pi\epsilon_0a^2}\zhat\quad(\text{평면 쪽 인력}).
+\]
+\textbf{(b)}\quad 높이 $z$에서 전기력 $-\dfrac{q^2}{16\pi\epsilon_0z^2}\zhat$이므로 외력은 $+\dfrac{q^2}{16\pi\epsilon_0z^2}\zhat$:
+\[
+W=\int_\infty^a\frac{q^2}{16\pi\epsilon_0z^2}\,dz=-\frac{q^2}{16\pi\epsilon_0a}.
+\]
+\textbf{(c)}\quad 실제 전하와 영상전하 두 점전하계의 에너지 $-\dfrac{q^2}{4\pi\epsilon_0(2a)}=-\dfrac{q^2}{8\pi\epsilon_0a}$는 전 공간($z<0$ 포함)에 장이 있는 경우의 값이다.
+실제로는 $z<0$에 장이 없으므로 $\frac{\epsilon_0}{2}\int E^2d\tau$는 대칭인 두 반공간 중 한쪽만 남아 절반이 된다.
+또한 실제 전하를 옮길 때 영상전하는 저절로 따라 움직이므로(일을 받지 않음) 외력의 일은 한 전하에 대한 것뿐이다.
+\ans{$\mathbf F=-\dfrac{q^2}{16\pi\epsilon_0a^2}\zhat$;\ $W=-\dfrac{q^2}{16\pi\epsilon_0a}$ (두 점전하계 에너지의 절반)}
+
+%=====================================================
+\sect{B. 구면 경계의 영상법}
+\prob{P4.}{점전하와 접지된 도체구}
+\textbf{실제 영역·경계조건}\quad $r>R$, $V(R,\theta)=0$, $V(\infty)=0$. 영상전하는 구 안($r<R$)에 둔다.
+
+\textbf{(a)}\quad $z$축 위 $b$에 $q'$를 두고 구면의 두 점 $\theta=0,\pi$에서 $V=0$을 요구하면
+$\dfrac{q}{a-R}+\dfrac{q'}{R-b}=0$, $\dfrac{q}{a+R}+\dfrac{q'}{R+b}=0$ →
+\[
+b=\frac{R^2}{a},\qquad q'=-\frac{R}{a}\,q\quad(b<R).
+\]
+\textbf{(b)}\quad
+\[
+V(r,\theta)=\frac{q}{4\pi\epsilon_0}\left[\frac{1}{\sqrt{r^2+a^2-2ar\cos\theta}}-\frac{R}{\sqrt{a^2r^2+R^4-2aR^2r\cos\theta}}\right]\qquad(r\ge R).
+\]
+$r=R$이면 둘째 항 분모가 $\sqrt{a^2R^2+R^4-2aR^3\cos\theta}=R\sqrt{a^2+R^2-2aR\cos\theta}$이므로 두 항이 모든 $\theta$에서 상쇄되어 $V(R,\theta)=0$.
+
+\textbf{(c)}\quad 구 바깥의 장이 $q+q'$의 장과 같으므로, 구를 감싸는 가우스 곡면(점전하 $q$는 제외)으로 보면 유도 총전하 $=q'=-\dfrac{R}{a}q$.
+
+\textbf{(d)}\quad
+\[
+\mathbf F=\frac{1}{4\pi\epsilon_0}\frac{q\,q'}{(a-b)^2}\zhat=-\frac{1}{4\pi\epsilon_0}\frac{q^2Ra}{(a^2-R^2)^2}\zhat,
+\]
+크기 $\dfrac{q^2Ra}{4\pi\epsilon_0(a^2-R^2)^2}$, 방향은 구 중심 쪽(인력).
+\ans{$b=R^2/a$, $q'=-qR/a$;\ $Q_{\rm ind}=-qR/a$;\ $|\mathbf F|=\dfrac{q^2Ra}{4\pi\epsilon_0(a^2-R^2)^2}$, 구를 향함}
+\chk{$a\to R$이면 $F\to\infty$; $a\gg R$이면 $F\approx\dfrac{q\,(qR/a)}{4\pi\epsilon_0a^2}$. $R\to\infty$, $a-R=d$ 고정이면 평면의 결과 $\dfrac{q^2}{4\pi\epsilon_0(2d)^2}$로 돌아간다.}
+
+\prob{P5.}{중성인 고립 도체구}
+\textbf{(a)}\quad 총전하 0을 맞추려면 $q'$를 상쇄하는 전하를 구면 등전위를 깨지 않는 위치(중심)에 둔다:
+\[
+q_0'=-q'=+\frac{R}{a}q\quad(\text{원점}).
+\]
+\textbf{(b)}\quad
+\[
+V(r,\theta)=\frac{q}{4\pi\epsilon_0}\left[\frac{1}{\sqrt{r^2+a^2-2ar\cos\theta}}-\frac{R}{\sqrt{a^2r^2+R^4-2aR^2r\cos\theta}}+\frac{R}{a\,r}\right]\qquad(r\ge R).
+\]
+$r=R$에서 앞의 두 항은 P4처럼 상쇄되고 셋째 항만 남아 $V(R,\theta)=\dfrac{q}{4\pi\epsilon_0a}$로 $\theta$와 무관(등전위). 이 값은 $q$가 구 중심에 만드는 전위와 같다.
+
+\textbf{(c)}\quad 먼 거리에서 가장 낮은 차수(홀극) 항은 $\dfrac{1}{4\pi\epsilon_0}\dfrac{Q_{\rm 전체}}{r}$이다.
+접지: $Q_{\rm 전체}=q+q'=q\big(1-\frac Ra\big)$ → $\dfrac{q(1-R/a)}{4\pi\epsilon_0r}$.
+중성 고립구: $Q_{\rm 전체}=q$ → $\dfrac{q}{4\pi\epsilon_0r}$. 즉 홀극 항의 계수가 $q(1-R/a)$에서 $q$로 커진다(도체 알짜 전하 0이므로 멀리서는 $q$만 보인다).
+\ans{$q_0'=+qR/a$ (중심);\ $V(R)=\dfrac{q}{4\pi\epsilon_0a}$;\ 홀극 항 $\dfrac{q(1-R/a)}{4\pi\epsilon_0 r}\to\dfrac{q}{4\pi\epsilon_0 r}$}
+
+%=====================================================
+\sect{C. 직교좌표계의 변수 분리법}
+\prob{P6.}{하나의 사인 모드로 주어진 경계}
+\textbf{(a)}\quad $\nabla^2V=0$에 $V=X(x)Y(y)$를 대입하고 $XY$로 나누면 $\dfrac{X''}{X}+\dfrac{Y''}{Y}=0$. 각 항은 상수여야 하므로
+\[
+\frac{d^2X}{dx^2}=k^2X,\qquad \frac{d^2Y}{dy^2}=-k^2Y.
+\]
+($Y(0)=Y(a)=0$을 만족하려면 $Y$가 진동해야 하므로 $Y$ 쪽에 $-k^2$를 둔다.)
+
+\textbf{(b)}\quad $Y(0)=Y(a)=0\Rightarrow Y=\sin(n\pi y/a)$, $k=n\pi/a$. $X(0)=0\Rightarrow X=\sinh(kx)$.
+경계 $V(b,y)=V_0\sin(\pi y/a)$는 $n=1$ 모드 하나뿐이므로
+\[
+V(x,y)=V_0\,\frac{\sinh(\pi x/a)}{\sinh(\pi b/a)}\,\sin\frac{\pi y}{a}.
+\]
+\textbf{(c)}\quad $\sinh(2u)=2\sinh u\cosh u$ ($u=\pi b/2a$)를 쓰면
+\[
+V\Big(\frac b2,\frac a2\Big)=\frac{V_0}{2\cosh(\pi b/2a)},\qquad
+\E=-\nabla V=-\frac{\pi V_0}{2a\,\sinh(\pi b/2a)}\,\xhat
+\]
+($y=a/2$에서 $\partial V/\partial y\propto\cos(\pi/2)=0$이므로 $y$ 성분 없음; 전위가 높은 $x=b$ 쪽에서 멀어지는 $-\xhat$ 방향).
+\ans{$V=V_0\dfrac{\sinh(\pi x/a)}{\sinh(\pi b/a)}\sin\dfrac{\pi y}{a}$;\ 중심에서 $V=\dfrac{V_0}{2\cosh(\pi b/2a)}$, $\E=-\dfrac{\pi V_0}{2a\sinh(\pi b/2a)}\xhat$}
+\chk{$\nabla^2V=(\pi/a)^2V-(\pi/a)^2V=0$; 네 경계에서 각각 $0,0,0,V_0\sin(\pi y/a)$. $0<V(\text{중심})<V_0/2$로 최대·최소 원리와 부합.}
+
+\prob{P7.}{일정한 경계전위의 푸리에 전개}
+\textbf{(a)}\quad $V_0=\sum_n c_n\sin(n\pi y/a)$, 직교성으로
+\[
+c_n=\frac2a\int_0^aV_0\sin\frac{n\pi y}{a}\,dy=\frac{2V_0}{n\pi}\big(1-\cos n\pi\big)=
+\begin{cases}\dfrac{4V_0}{n\pi}, & n\ \text{홀수}\\ 0, & n\ \text{짝수}\end{cases}
+\]
+(짝수 $n$에서는 $\cos n\pi=1$. 상수 함수가 $y=a/2$에 대해 대칭이고 짝수 모드는 반대칭이라 사라진다.)
+
+\textbf{(b)}\quad P6의 각 모드를 경계값의 계수로 겹치면
+\[
+V(x,y)=\frac{4V_0}{\pi}\sum_{n=1,3,5,\dots}\frac1n\,\frac{\sinh(n\pi x/a)}{\sinh(n\pi b/a)}\,\sin\frac{n\pi y}{a}.
+\]
+\textbf{(c)}\quad 각 항 $\sinh(k_nx)\sin(k_ny)$, $k_n=n\pi/a$:
+$\nabla^2=k_n^2-k_n^2=0$. $x=0$에서 $\sinh0=0$, $y=0$에서 $\sin0=0$, $y=a$에서 $\sin n\pi=0$. 라플라스 방정식은 선형이므로 합도 이를 모두 만족하고, $x=b$에서는 (a)의 급수가 되어 $V_0$를 재현한다.
+
+\textbf{(d)}\quad 모서리 $(b,0)$, $(b,a)$에서 경계값이 $V_0$에서 0으로 끊어진다. 푸리에 급수는 불연속점에서 양쪽 극한의 평균으로 수렴한다.
+사인 급수는 $[-a,a]$로의 홀함수 연장의 급수이므로 $y=0,a$에서 $\tfrac12(V_0+(-V_0))=0$을 주고(각 항이 0), 불연속점 근처에서는 약 9\% 넘치는 깁스 현상이 나타난다.
+영역 안쪽($x<b$)에서는 $\sinh$ 인자 때문에 급수가 빠르게 수렴하며 전위는 매끄럽다. (물리적으로는 모서리에 가는 절연 간격이 있다고 본다.)
+\ans{$c_n=\dfrac{4V_0}{n\pi}$ (홀수), 0 (짝수);\ $V=\dfrac{4V_0}{\pi}\sum_{n\,\text{홀}}\dfrac1n\dfrac{\sinh(n\pi x/a)}{\sinh(n\pi b/a)}\sin\dfrac{n\pi y}{a}$;\ 불연속점에서 평균값으로 수렴}
+
+%=====================================================
+\sect{D. 구 좌표계의 변수 분리법}
+\prob{P8.}{$\cos\theta$ 경계가 고르는 모드}
+\textbf{법칙}\quad 방위각 대칭인 라플라스 방정식의 일반해 $V=\sum_\ell\big(A_\ell r^\ell+B_\ell r^{-(\ell+1)}\big)P_\ell(\cos\theta)$, 경계값 $V_0\cos\theta=V_0P_1(\cos\theta)$.
+르장드르 다항식의 직교성으로 $\ell=1$ 항만 남는다.
+
+\textbf{(a)}\quad $r<R$: 원점에서 유한하므로 $B_\ell=0$. $A_1R=V_0$:
+\[
+V=V_0\frac rR\cos\theta=\frac{V_0}{R}z,\qquad \E=-\nabla V=-\frac{V_0}{R}\zhat\ (\text{균일한 장}).
+\]
+\textbf{(b)}\quad $r>R$: $V\to0$이므로 $A_\ell=0$. $B_1/R^2=V_0$:
+\[
+V=V_0\frac{R^2}{r^2}\cos\theta.
+\]
+\textbf{(c)}\quad 두 해 모두 $\ell=1$ ($P_1(\cos\theta)=\cos\theta$)만 필요하다.
+
+\textbf{(d)}\quad 쌍극자 전위 $V=\dfrac{1}{4\pi\epsilon_0}\dfrac{p\cos\theta}{r^2}$와 비교하면 (바깥 해는 모든 $r>R$에서 정확히 쌍극자 꼴)
+\[
+\mathbf p=4\pi\epsilon_0R^2V_0\,\zhat.
+\]
+\ans{$V_{\rm in}=V_0\dfrac rR\cos\theta$, $\E_{\rm in}=-\dfrac{V_0}{R}\zhat$;\ $V_{\rm out}=V_0\dfrac{R^2}{r^2}\cos\theta$;\ $\ell=1$;\ $\mathbf p=4\pi\epsilon_0R^2V_0\zhat$}
+\chk{$r=R$에서 두 해 모두 $V_0\cos\theta$로 연속. 바깥 장 $\E=\dfrac{V_0R^2}{r^3}(2\cos\theta\,\rhat+\sin\theta\,\that)$은 쌍극자 장. 구면 전하 $\sigma=\epsilon_0(E_r^{\rm out}-E_r^{\rm in})|_R=\dfrac{3\epsilon_0V_0}{R}\cos\theta$.}
+
+\vspace{6pt}
+{\small\color{gray} 검산: P2의 $\sigma$·$Q_{\rm ind}$, P4의 구면 등전위, P6의 중심값·전기장, P7의 계수는 sympy로 확인함. 용어는 한글판(영상법, 변수 분리법, 유일성 정리, 르장드르 다항식, 푸아송 방정식) 기준.}
+\end{document}
