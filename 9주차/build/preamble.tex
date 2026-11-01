@@ -1,0 +1,46 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=17mm,top=15mm,bottom=18mm]{geometry}
+\usepackage{fontspec,unicode-math,amsmath,enumitem,xcolor,fancyhdr,lastpage,needspace,tcolorbox,tikz}
+\IfFontExistsTF{Arial Unicode MS}{\setmainfont{Arial Unicode MS}\setsansfont{Arial Unicode MS}}{\setmainfont{Noto Sans CJK KR}[BoldFont={Noto Sans CJK KR Bold}]\setsansfont{Noto Sans CJK KR}[BoldFont={Noto Sans CJK KR Bold}]}
+\IfFontExistsTF{TeX Gyre Termes Math}{\setmathfont{TeX Gyre Termes Math}}{\setmathfont[Path=/usr/local/texlive/2019/texmf-dist/fonts/opentype/public/tex-gyre-math/]{texgyretermes-math.otf}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\emergencystretch}{2em}
+\setlist[enumerate]{leftmargin=7mm,itemsep=1pt,topsep=2pt}
+\definecolor{navy}{HTML}{0B1F3A}
+\definecolor{blue}{HTML}{2563EB}
+\definecolor{light}{HTML}{E0F0FE}
+\definecolor{hair}{HTML}{D0D5DD}
+\definecolor{gray}{HTML}{667085}
+\definecolor{ink}{HTML}{191919}
+\definecolor{red}{HTML}{B42318}
+\pagestyle{fancy}
+\fancyhf{}
+\lfoot{전자기학 2026 · WEEK 09}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\vect}[1]{\symbf{#1}}
+\newcommand{\unit}[1]{\hat{\symbf{#1}}}
+\newcommand{\dd}{\mathop{}\!\mathrm{d}}
+\newcommand{\sepR}{\symscr{r}}
+\newcommand{\problem}[3]{%
+  \needspace{0.18\textheight}
+  \par\vspace{2.2mm}
+  {\large\bfseries\color{navy}#1\hfill{\normalsize\color{blue}#2점}}\par
+  \smallskip #3\par
+}
+\newcommand{\sectionbar}[1]{%
+  \needspace{0.25\textheight}
+  \par\vspace{2.5mm}
+  \colorbox{navy}{\parbox{0.965\linewidth}{\color{white}\bfseries\large #1}}
+  \par\vspace{0.5mm}
+}
+\newtcolorbox{infobox}{colback=light,colframe=blue,boxrule=0.5pt,arc=0pt,left=3mm,right=3mm,top=2mm,bottom=2mm}
+\newcommand{\answer}[1]{\par\begin{tcolorbox}[colback=white,colframe=hair,boxrule=0.5pt,arc=0pt,left=3mm,right=3mm,top=1.5mm,bottom=1.5mm]{\color{blue}\bfseries 풀이}\quad #1\end{tcolorbox}}
+% TikZ 공통 스타일
+\tikzset{
+  ax/.style={-latex, draw=gray, line width=0.6pt},
+  pc/.style={circle, fill=blue, inner sep=0pt, minimum size=4.2pt},
+  nc/.style={circle, fill=ink, inner sep=0pt, minimum size=4.2pt},
+  lab/.style={font=\small},
+}
